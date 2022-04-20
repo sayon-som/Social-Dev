@@ -7,6 +7,9 @@ const UserModel = require("../../models/user");
 const { body, validationResult, check } = require("express-validator");
 const { route } = require("./auth");
 const { compareSync } = require("bcryptjs");
+//importing the config module
+const config=require('config');
+const request=require('request');
 
 // @route  GET api/profile/me
 // @desc   get the current users profile
@@ -337,4 +340,41 @@ Router.delete("/education/:ed_id", auth, async (req, res) => {
     return res.status(500).json({ msg: "Server Error" });
   }
 });
+// @route  GET api/profile/github/:username
+// @desc   access to all the github profiles of the developer with the specified user name
+// @access Public
+Router.get("/github/:username",(req,res)=>{
+  try{
+    const githubrequesthandler = {
+      url: `https://api.github.com/users/${
+        req.params.username
+      }/repos?per_page=5&sort=created:asc&client_id=${config.get(
+        "clientid"
+      )}&client_secret=${config.get("clientsecret")}`,
+      method: "GET",
+      headers: { "user-agent": "node.js" },
+    };
+    //parsing the request
+    request(githubrequesthandler,(err,response,body)=>{
+      if(err){
+        console.error=err;
+
+      }
+      if(response.statusCode!==200){
+        return res.status(404).json({msg:"github profile not found"});
+      }
+     return res.json(JSON.parse(body));
+
+    });
+  }
+  catch(err){
+    console.log(err);
+    res.status(500).json({msg:"Server Error"})
+  }
+
+})
+//halndling the post request
+
+
+
 module.exports = Router;
