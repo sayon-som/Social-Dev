@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import { useDispatch } from "react-redux";
 import { alertActions } from "../../store/alert";
+import { register_user } from "../../store/auth_actions";
 
 const Register = () => {
   const [formdata, setformdata] = useState({
@@ -56,6 +57,8 @@ const Register = () => {
       // console.log(e.response.data)
       // }
       //to be made with help of react redux
+      //sending the data to the register user action
+      dispatch(register_user({ name, email, password }));
     }
   };
 
