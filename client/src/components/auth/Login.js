@@ -1,9 +1,13 @@
 import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login_user } from "../../store/auth_actions";
+import { Redirect } from "react-router-dom";
 const Login = () => {
+  //bringing the auth state
+  const navigate = useNavigate();
+  const isauth = useSelector((state) => state.auth.isauth);
   const dispatch = useDispatch();
   const [formdata, setformdata] = useState({
     email: "",
@@ -20,13 +24,19 @@ const Login = () => {
   //creating a submit function for the process to work
   const submit = async (e) => {
     e.preventDefault();
+    if (isauth) {
+      navigate("/dashboard");
+    }
     try {
       //handling the basic logic for login
       dispatch(login_user({ email, password }));
+      
     } catch (err) {
       console.log(err.response.data);
     }
   };
+  
+
   return (
     <Fragment>
       <h1 className="large text-primary">Sign In</h1>

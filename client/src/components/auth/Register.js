@@ -1,14 +1,16 @@
 import React, { Fragment } from "react";
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { alertActions } from "../../store/alert";
 import { register_user } from "../../store/auth_actions";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const isauth = useSelector((state) => state.auth.isauth);
   const [formdata, setformdata] = useState({
     name: "",
     email: "",
@@ -59,6 +61,9 @@ const Register = () => {
       //to be made with help of react redux
       //sending the data to the register user action
       dispatch(register_user({ name, email, password }));
+      if (isauth) {
+        navigate("/dashboard");
+      }
     }
   };
 

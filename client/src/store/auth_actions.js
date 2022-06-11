@@ -128,3 +128,10 @@ export const login_user = ({ email, password }) => {
     }
   };
 };
+//logout actions
+
+export const logout = () => {
+  return (dispatch) => {
+    dispatch(auth_real_actions.Logout());
+  };
+};

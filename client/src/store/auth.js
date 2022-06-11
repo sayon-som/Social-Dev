@@ -20,7 +20,7 @@ export const authSlice = createSlice({
     register_success(state, action) {
       //for the success
       state.token = localStorage.setItem("token", action.payload.token);
-      
+
       state.isauth = true;
       state.loading = false;
     },
@@ -29,12 +29,14 @@ export const authSlice = createSlice({
       state.token = null;
       state.isauth = false;
       state.loading = false;
+      state.user = null;
     },
     auth_error(state, action) {
       localStorage.removeItem("token");
       state.token = null;
       state.isauth = false;
       state.loading = false;
+      state.user = null;
     },
     login_success(state, action) {
       state.token = localStorage.setItem("token", action.payload.token);
@@ -47,6 +49,14 @@ export const authSlice = createSlice({
       state.token = null;
       state.isauth = false;
       state.loading = false;
+      state.user = null;
+    },
+    Logout(state, action) {
+      localStorage.removeItem("token");
+      state.token = null;
+      state.isauth = false;
+      state.loading = false;
+      state.user = null;
     },
   },
 });
