@@ -32,7 +32,7 @@ Router.post(
   "/",
   [
     check("email", "Email not valid").isEmail(),
-    check("password", "password required")
+    check("password", "password required"),
   ],
   async (req, res) => {
     //   res.status(200).json({ msg: req.body });
@@ -42,12 +42,12 @@ Router.post(
       return res.status(401).json({ errors: errors.array() });
     }
     //errors are missing
-
+    
     const { email, password } = req.body;
-   
+
     try {
       let user = await User.findOne({ email });
-      
+
       if (!user) {
         return res
           .status(401)
@@ -59,7 +59,6 @@ Router.post(
       if (!ismatch) {
         return res.status(401).json({ msg: "invalid credentials" });
       }
-      
 
       //setting the payload
       const payload = {
@@ -69,15 +68,26 @@ Router.post(
       };
       let token;
       try {
-        token = jwt.sign(payload, config.get("secret"), {
-          expiresIn: "1h",
-        });
-        res.json({ token: token });
+        //   token = jwt.sign(payload, config.get("secret"), {
+        //     expiresIn: "1h",
+        //   });
+        //   res.json({ token });
+        // }
+        jwt.sign(
+          payload,
+          config.get("secret"),
+          { expiresIn: "1hr" },
+          (err, token) => {
+            if (err) throw err;
+            res.json({ token });
+          }
+        );
       } catch (err) {
         throw err;
       }
-    } catch (e) {
-      res.status(400).json({ msg: e });
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server error");
     }
   }
 );

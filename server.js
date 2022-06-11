@@ -4,15 +4,16 @@ const app = express();
 //getting the server connection
 const connect = require("./config/db");
 //getting the routers
+
+const cors = require("cors");
 const UserRouter = require("./routes/api/user");
 const AuthRouter = require("./routes/api/auth");
 const PostRouter = require("./routes/api/post");
 const ProfileRouter = require("./routes/api/profile");
-
+app.use(cors());
 //for using the body parser functionalities
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 
 //testing
 app.get("/", (req, res) => {

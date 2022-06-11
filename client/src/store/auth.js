@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const auth_state = {
   //for the token
-  token: localStorage.getItem('token'),
+  token: localStorage.getItem("token"),
   isauth: null,
   loading: true,
   user: null,
@@ -11,16 +11,39 @@ export const authSlice = createSlice({
   name: "auth",
   initialState: auth_state,
   reducers: {
+    loaded(state, action) {
+      state.loading = false;
+      state.user = action.payload;
+      state.isauth = true;
+    },
     //reducer methods
-    register_success(state, payload) {
+    register_success(state, action) {
       //for the success
-      localStorage.setItem('token', payload.token);
+      state.token = localStorage.setItem("token", action.payload.token);
+      
+      state.isauth = true;
+      state.loading = false;
+    },
+    register_fail(state, action) {
+      localStorage.removeItem("token");
+      state.token = null;
+      state.isauth = false;
+      state.loading = false;
+    },
+    auth_error(state, action) {
+      localStorage.removeItem("token");
+      state.token = null;
+      state.isauth = false;
+      state.loading = false;
+    },
+    login_success(state, action) {
+      state.token = localStorage.setItem("token", action.payload.token);
 
       state.isauth = true;
-      state.loading = true;
+      state.loading = false;
     },
-    register_fail(state, payload) {
-      localStorage.removeItem('token');
+    login_fail(state, action) {
+      localStorage.removeItem("token");
       state.token = null;
       state.isauth = false;
       state.loading = false;
