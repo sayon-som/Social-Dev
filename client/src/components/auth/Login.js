@@ -24,22 +24,21 @@ const Login = () => {
   //creating a submit function for the process to work
   const submit = async (e) => {
     e.preventDefault();
-    if (isauth) {
-      navigate("/dashboard");
-    }
+
     try {
       //handling the basic logic for login
       dispatch(login_user({ email, password }));
-      
+      if (isauth) {
+        navigate("/dashboard");
+      }
     } catch (err) {
       console.log(err.response.data);
     }
   };
-  
 
   return (
     <Fragment>
-      <h1 className="large text-primary">Sign In</h1>
+      <h1 className="large text-primary">Log In</h1>
       <p className="lead">
         <i className="fas fa-user"></i> login to your account
       </p>

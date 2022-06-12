@@ -1,11 +1,17 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React from "react";
+import { useSelector } from "react-redux";
+import { Link, Navigate } from "react-router-dom";
 const Landing = () => {
+  const auth = useSelector((state) => state.auth.isauth);
+  if (auth) {
+    return <Navigate to="/dashboard" />;
+  }
+
   return (
     <section className="landing">
       <div className="dark-overlay">
         <div className="landing-inner">
-          <h1 className="x-large">Developer Socials</h1>
+          <h1 className="x-large">Social Dev</h1>
           <p className="lead">
             Create a developer profile/portfolio, share posts and get help from
             other developers and connect with them
@@ -22,6 +28,6 @@ const Landing = () => {
       </div>
     </section>
   );
-}
+};
 
-export default Landing
+export default Landing;

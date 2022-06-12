@@ -8,8 +8,8 @@ const { body, validationResult, check } = require("express-validator");
 const { route } = require("./auth");
 const { compareSync } = require("bcryptjs");
 //importing the config module
-const config=require('config');
-const request=require('request');
+const config = require("config");
+const request = require("request");
 
 // @route  GET api/profile/me
 // @desc   get the current users profile
@@ -26,7 +26,7 @@ Router.get("/me", auth, async (req, res) => {
     if (!profile) {
       return res.status(400).json({ msg: "no profile for the user" });
     }
-    res.json({ profile: profile });
+    res.json(profile);
   } catch (err) {
     return res.status(500).send("Server error");
   }
@@ -291,8 +291,6 @@ Router.put(
     //adding the experience
     const { school, degree, fieldofstudy, from, to, current } = req.body;
 
-
-
     const newedu = {
       school,
       degree,
@@ -302,10 +300,11 @@ Router.put(
       from,
     };
     try {
-     let profile = await ProfileModel.findOne({ user: req.user.id });
+      let profile = await ProfileModel.findOne({ user: req.user.id });
 
       if (!profile) {
-        res.status(404).json({msg:"profile not present"});}
+        res.status(404).json({ msg: "profile not present" });
+      }
 
       profile.education.unshift(newedu);
       await profile.save();
@@ -343,8 +342,8 @@ Router.delete("/education/:ed_id", auth, async (req, res) => {
 // @route  GET api/profile/github/:username
 // @desc   access to all the github profiles of the developer with the specified user name
 // @access Public
-Router.get("/github/:username",(req,res)=>{
-  try{
+Router.get("/github/:username", (req, res) => {
+  try {
     const githubrequesthandler = {
       url: `https://api.github.com/users/${
         req.params.username
@@ -355,26 +354,20 @@ Router.get("/github/:username",(req,res)=>{
       headers: { "user-agent": "node.js" },
     };
     //parsing the request
-    request(githubrequesthandler,(err,response,body)=>{
-      if(err){
-        console.error=err;
-
+    request(githubrequesthandler, (err, response, body) => {
+      if (err) {
+        console.error = err;
       }
-      if(response.statusCode!==200){
-        return res.status(404).json({msg:"github profile not found"});
+      if (response.statusCode !== 200) {
+        return res.status(404).json({ msg: "github profile not found" });
       }
-     return res.json(JSON.parse(body));
-
+      return res.json(JSON.parse(body));
     });
-  }
-  catch(err){
+  } catch (err) {
     console.log(err);
-    res.status(500).json({msg:"Server Error"})
+    res.status(500).json({ msg: "Server Error" });
   }
-
-})
+});
 //halndling the post request
-
-
 
 module.exports = Router;

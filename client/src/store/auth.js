@@ -58,6 +58,7 @@ export const authSlice = createSlice({
       state.loading = false;
       state.user = null;
     },
+   
   },
 });
 export const auth_real_actions = authSlice.actions;

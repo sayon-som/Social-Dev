@@ -5,7 +5,7 @@ import { alertActions } from "./alert";
 //loading user
 import setauth from "../auth/addauthtoken";
 import { useEffect } from "react";
-
+import { ProfileActions } from "./Profile";
 export const load_user = () => {
   return async (dispatch) => {
     if (localStorage.token) {
@@ -133,5 +133,7 @@ export const login_user = ({ email, password }) => {
 export const logout = () => {
   return (dispatch) => {
     dispatch(auth_real_actions.Logout());
+    //dispatching the clear functionality to delete the remaining users
+    dispatch(ProfileActions.clear());
   };
 };
