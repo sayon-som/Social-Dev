@@ -72,7 +72,7 @@ export const register_user = ({ name, email, password }) => {
         });
       }
 
-      //if there forms any error
+      //if there  s any error
       dispatch(auth_real_actions.register_fail());
     }
   };

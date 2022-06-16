@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const profile_state = {
   profile: null,
   profiles: [],
-  repso: [],
+  repos: [],
   loading: true,
   error: {},
 };
@@ -24,7 +24,19 @@ export const ProfileSlice = createSlice({
       state.loading = false;
       state.profile = null;
       state.profiles = [];
-      state.repso = [];
+      state.repos = [];
+    },
+    update_profile(state, action) {
+      state.profile = action.payload;
+      state.loading = false;
+    },
+    get_profiles(state, action) {
+      state.profiles = action.payload;
+      state.loading = false;
+    },
+    get_repos(state, action) {
+      state.repos = action.payload;
+      state.loading = false;
     },
   },
 });

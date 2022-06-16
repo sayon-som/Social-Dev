@@ -16,6 +16,12 @@ import store from "./store";
 import { Provider } from "react-redux";
 import Alert from "./components/layout/Alert";
 import PrivateRoute from "./components/routing/PrivateRoute";
+import Edit_profile from "./components/Profile_ops/Edit_Profile";
+import Add_education from "./components/Profile_ops/Add_education";
+import Add_Experience from "./components/Profile_ops/Add_Experience";
+import Profiles from "./components/Profiles/Profiles";
+import Profile from "./components/Profile/Profile";
+import Post from "./components/Posts/Post";
 if (localStorage.token) {
   setauth(localStorage.token);
 }
@@ -46,10 +52,17 @@ const App = () => {
                 path="dashboard"
                 element={<PrivateRoute component={Dashboard} />}
               />
-              <Route
+              {/* <Route
                 path="create_profile"
                 element={<PrivateRoute component={Create_profile} />}
-              />
+              /> */}
+              <Route path="/create_profile" element={<Create_profile />} />
+              <Route path="/edit_profile" element={<Edit_profile />} />
+              <Route path="/add_education" element={<Add_education />} />
+              <Route path="/add_experience" element={<Add_Experience />} />
+              <Route path="/profiles" element={<Profiles />} />
+              <Route path="/profile/:id" element={<Profile />} />
+              <Route path="/posts" element={<Post />} />
             </Routes>
           </section>
         </Fragment>

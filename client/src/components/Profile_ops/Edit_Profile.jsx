@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Fragment } from "react";
 import { ProfileFormCreation } from "../../store/ProfileFormActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import { get_profile } from "../../store/ProfileActions";
 import { ProfileActions } from "../../store/Profile";
 import { useMatch } from "react-router-dom";
-
-const Create_profile = () => {
+//get the current prifle and the profiel action
+//get the profile state
+const Edit_profile = () => {
   const profile = useSelector((state) => state.profile.profile);
+  const loading = useSelector((state) => state.profile.loading);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  //dispatch(get_profile());
   const creatingProfile = useMatch("/create_profile");
   const initialState = {
     company: "",
@@ -61,9 +64,29 @@ const Create_profile = () => {
     setformdata({ ...formdata, [e.target.name]: e.target.value });
   };
 
+  //get the current prifle using the use effect hook
+  useEffect(() => {
+    dispatch(get_profile());
+    setformdata({
+      company: loading || !profile.company ? "" : profile.company,
+      website: loading || !profile.website ? "" : profile.website,
+      location: loading || !profile.location ? "" : profile.location,
+      status: loading || !profile.status ? "" : profile.status,
+      skills: loading || !profile.skills ? "" : profile.status,
+      githubusername:
+        loading || !profile.githubusername ? "" : githubusername.company,
+      bio: loading || !profile.bio ? "" : profile.bio,
+      twitter: loading || !profile.twitter ? "" : profile.twitter,
+      facebook: loading || !profile.facebook ? "" : profile.facebook,
+      linkedin: loading || !profile.linkedin ? "" : profile.linkedin,
+      instagram: loading || !profile.instagram ? "" : profile.instagram,
+    });
+  }, [loading]);
+
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(ProfileFormCreation(formdata, navigate, profile ? true : false));
+    dispatch(ProfileFormCreation(formdata, navigate, true));
+    navigate("/dashboard");
   };
   return (
     <section className="container">
@@ -244,4 +267,4 @@ const Create_profile = () => {
   );
 };
 
-export default Create_profile;
+export default Edit_profile;

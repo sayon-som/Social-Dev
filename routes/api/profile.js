@@ -10,7 +10,7 @@ const { compareSync } = require("bcryptjs");
 //importing the config module
 const config = require("config");
 const request = require("request");
-
+const post = require("../../models/post");
 // @route  GET api/profile/me
 // @desc   get the current users profile
 // @access Private
@@ -135,7 +135,7 @@ Router.get("/", async (req, res) => {
 
     res.json(profile);
   } catch (err) {
-    if (err.king == "ObjectId") {
+    if (err.kind == "ObjectId") {
       return res.status(400).json({ msg: "Profile not found" });
     }
     res.status(500).json({ error: "Server error" });
@@ -162,13 +162,15 @@ Router.get("/user/:user_id", async (req, res) => {
   }
 });
 
-// @route  DELETE api/profile/user/:userId
+// @route  DELETE api/profile/
 // @desc   getting the profile , user and posts
 // @access Private
 
 Router.delete("/", auth, async (req, res) => {
   try {
     //@todo  also remove the user posts
+
+    await post.deleteMany({ user: req.user.id });
 
     //remove the profiles
     //deleting the profiles
@@ -184,7 +186,7 @@ Router.delete("/", auth, async (req, res) => {
       return res.status(400).json({ msg: "no user is present" });
     }
 
-    res.json({ msg: "user and the prfile is beign removed" });
+    res.json({ msg: "user and the profile is beign removed" });
   } catch (err) {
     res.status(500).json({ error: err });
   }
@@ -278,7 +280,7 @@ Router.put(
       check("school", " should be present").not().isEmpty(),
       check("degree", "degree should be present").not().isEmpty(),
       check("fieldofstudy", "field of study should be present").not().isEmpty(),
-      check("from", "from should be present").not().isEmpty(),
+      check("from", "from should not be empty").not().isEmpty(),
     ],
   ],
   async (req, res) => {

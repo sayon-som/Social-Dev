@@ -58,7 +58,13 @@ export const authSlice = createSlice({
       state.loading = false;
       state.user = null;
     },
-   
+    deleted_account(state, action) {
+      localStorage.removeItem("token");
+      state.token = null;
+      state.isauth = false;
+      state.loading = false;
+      state.user = null;
+    },
   },
 });
 export const auth_real_actions = authSlice.actions;
