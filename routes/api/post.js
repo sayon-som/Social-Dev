@@ -35,14 +35,16 @@ Router.post(
       //getting the user from the id which is being supplied as the payload for the authentication for creating the new post
 
       const user = await UserModel.findById(req.user.id).select("-password");
-
+      console.log(user);
       //creating the new post
       const newPost = new PostModel({
         text: req.body.text,
-        name: req.body.name,
-        avatar: req.body.avatar,
+        name: user.name,
+        avatar: user.avatar,
         user: req.user.id,
       });
+      console.log(newPost);
+
       //saving the new post and showing the result
       await newPost.save((err, result) => {
         if (err) {
@@ -178,7 +180,6 @@ Router.put("/unlikes/:id", auth, async (req, res) => {
   }
 });
 
-
 // @route  POST api/post/comment/:id
 // @desc   creating a new comment
 // @access Private
@@ -198,13 +199,12 @@ Router.post(
 
       const user = await UserModel.findById(req.user.id).select("-password");
       //getting the specific post from the post id in the url
-      const post=await PostModel.findById(req.params.id);
-
+      const post = await PostModel.findById(req.params.id);
 
       //creating the new comment
       const newComment = {
         text: req.body.text,
-         name: user.name,
+        name: user.name,
         avatar: user.avatar,
         user: user.id,
       };
@@ -225,24 +225,24 @@ Router.post(
   }
 );
 
-
 // @route  POST api/post/comment/:post_id/:comment_id
 // @desc   deleting the comment
 // @access Private
-Router.delete("/comment/:id/:comment_id",auth,async(req,res)=>{
-  try{
+Router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
+  try {
     //getting post by the id
-    const post=await PostModel.findById(req.params.id);
+    const post = await PostModel.findById(req.params.id);
     //getting the comments
-    const comment= post.comments.find(comment=>comment.id===req.params.comment_id);
-    if(!comment){
-     return  res.status(404).json({msg:"The comment does not exists"})
+    const comment = post.comments.find(
+      (comment) => comment.id === req.params.comment_id
+    );
+    if (!comment) {
+      return res.status(404).json({ msg: "The comment does not exists" });
     }
     //checking for the user
-   
-    if(comment.user.toString()!==req.user.id){
 
-return res.status(404).json({ msg: "The user does not exist" });
+    if (comment.user.toString() !== req.user.id) {
+      return res.status(404).json({ msg: "The user does not exist" });
     }
 
     //if everything works fine
@@ -251,12 +251,10 @@ return res.status(404).json({ msg: "The user does not exist" });
       .indexOf(req.user.id);
 
     post.comments.splice(removeIndex, 1);
-    post.save()
+    post.save();
     return res.status(200).json(post.comments);
-  }
-  catch(err){
+  } catch (err) {
     return res.status(500).json({ msg: "Server Error" });
   }
-
 });
 module.exports = Router;

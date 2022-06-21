@@ -2,6 +2,8 @@ import axios from "axios";
 import { alertActions } from "./alert";
 import { v4 as uuidv4 } from "uuid";
 import { postActions } from "./Post";
+import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export const Get_Post = () => {
   return async (dispatch) => {
@@ -26,35 +28,40 @@ export const Get_Post = () => {
 
 //adding likes
 // Add like
-export const addLike = (id) => async (dispatch) => {
-  try {
-    const res = await axios.put(`http://localhost:8000/api/post/likes/${id}`);
-    dispatch(postActions.UPDATE_LIKES({ id, likes: res.data }));
-  } catch (err) {
-    dispatch(
-      postActions.POST_ERROR({
-        msg: err.response.statusText,
-        status: err.response.status,
-      })
-    );
-  }
+export const addLike = (id) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.put(`http://localhost:8000/api/post/likes/${id}`);
+      dispatch(postActions.UPDATE_LIKES({ id, likes: res.data }));
+      
+    } catch (err) {
+      dispatch(
+        postActions.POST_ERROR({
+          msg: err.response.statusText,
+          status: err.response.status,
+        })
+      );
+    }
+  };
 };
 
 //remove likes
-export const removeLike = (id) => async (dispatch) => {
-  try {
-    const res = await axios.delete(
-      `http://localhost:8000/api/post/unlikes/${id}`
-    );
-    dispatch(postActions.UPDATE_LIKES({ id, likes: res.data }));
-  } catch (err) {
-    dispatch(
-      postActions.POST_ERROR({
-        msg: err.response.statusText,
-        status: err.response.status,
-      })
-    );
-  }
+export const removeLike = (id) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.put(
+        `http://localhost:8000/api/post/unlikes/${id}`
+      );
+      dispatch(postActions.UPDATE_LIKES({ id, likes: res.data }));
+    } catch (err) {
+      dispatch(
+        postActions.POST_ERROR({
+          msg: err.response.statusText,
+          status: err.response.status,
+        })
+      );
+    }
+  };
 };
 
 //delelte post
