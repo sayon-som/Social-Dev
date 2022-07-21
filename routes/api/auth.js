@@ -42,7 +42,7 @@ Router.post(
       return res.status(401).json({ errors: errors.array() });
     }
     //errors are missing
-    
+
     const { email, password } = req.body;
 
     try {
@@ -93,3 +93,5 @@ Router.post(
 );
 
 module.exports = Router;
+
+/*Testing branch*/

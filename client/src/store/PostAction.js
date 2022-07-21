@@ -2,7 +2,7 @@ import axios from "axios";
 import { alertActions } from "./alert";
 import { v4 as uuidv4 } from "uuid";
 import { postActions } from "./Post";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 export const Get_Post = () => {
@@ -14,6 +14,7 @@ export const Get_Post = () => {
     };
     try {
       const res = await get_posts();
+      console.log(res.data);
       dispatch(postActions.GET_POSTS(res.data));
     } catch (err) {
       dispatch(
@@ -28,11 +29,17 @@ export const Get_Post = () => {
 
 //adding likes
 // Add like
+
 export const addLike = (id) => {
   return async (dispatch) => {
-    try {
+    const likes = async () => {
       const res = await axios.put(`http://localhost:8000/api/post/likes/${id}`);
+      return res;
+    };
+    try {  
+      const res = await likes();
       dispatch(postActions.UPDATE_LIKES({ id, likes: res.data }));
+      
       
     } catch (err) {
       dispatch(

@@ -66,6 +66,7 @@ Router.get("/", auth, async (req, res) => {
   //getting all the posts
   try {
     const post = await PostModel.find().sort({ date: -1 });
+    console.log(post);
     if (!post) {
       return res.status(500).json({ msg: "Server Error" });
     }
@@ -176,7 +177,7 @@ Router.put("/unlikes/:id", auth, async (req, res) => {
       .catch((err) => console.log(err));
     return res.status(200).json(post.likes);
   } catch (err) {
-    res.status(500).json({ msg: "Server Error" });
+    res.status(500).json("Server Error");
   }
 });
 

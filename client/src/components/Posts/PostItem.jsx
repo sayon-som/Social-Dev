@@ -1,9 +1,8 @@
-
 import { Link } from "react-router-dom";
 import formatDate from "../../auth/formatDate";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addLike,removeLike, deletePost } from "../../store/PostAction";
+import { addLike, removeLike, deletePost } from "../../store/PostAction";
 import { Fragment } from "react";
 const PostItem = ({
   addLike,
@@ -16,11 +15,7 @@ const PostItem = ({
   <div className="post bg-white p-1 my-1">
     <div>
       <Link to={`/profile/${user}`}>
-        <img
-          className="round-img"
-          src={avatar}
-          alt=""
-        />
+        <img className="round-img" src={avatar} alt="" />
         <h4>{name}</h4>
       </Link>
     </div>
@@ -45,6 +40,7 @@ const PostItem = ({
           >
             <i className="fas fa-thumbs-down" />
           </button>
+
           <Link to={`/posts/${_id}`} className="btn btn-primary">
             Discussion{" "}
             {comments.length > 0 && (
