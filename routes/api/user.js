@@ -77,8 +77,8 @@ Router.post(
         token = jwt.sign(payload, config.get("secret"), {
           expiresIn: "1h",
         });
-        res.json({ token });
-        console.log(token);
+        return res.json({ token });
+        
         //storing the token in the local storafe
       } catch (err) {
         throw err;

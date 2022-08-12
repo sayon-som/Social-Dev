@@ -9,7 +9,7 @@ const Post = () => {
   const posts = useSelector((state) => state.post.posts);
   useEffect(() => {
     dispatch(Get_Post());
-  },[dispatch]);
+  },[]);
   console.log(posts);
   return (
     <section className="container">

@@ -117,7 +117,7 @@ Router.post(
         .then((docs) => res.status(200).json({ msg: "profile created" }))
         .catch((err) => res.status(401).json({ error: err }));
     } catch (err) {
-      res.status(500).json({ error: "Server error" });
+      return res.status(500).json({ error: "Server error" });
     }
   }
 );

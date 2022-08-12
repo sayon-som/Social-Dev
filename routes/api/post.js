@@ -35,7 +35,7 @@ Router.post(
       //getting the user from the id which is being supplied as the payload for the authentication for creating the new post
 
       const user = await UserModel.findById(req.user.id).select("-password");
-      console.log(user);
+
       //creating the new post
       const newPost = new PostModel({
         text: req.body.text,
@@ -43,7 +43,6 @@ Router.post(
         avatar: user.avatar,
         user: req.user.id,
       });
-      console.log(newPost);
 
       //saving the new post and showing the result
       await newPost.save((err, result) => {
@@ -66,7 +65,7 @@ Router.get("/", auth, async (req, res) => {
   //getting all the posts
   try {
     const post = await PostModel.find().sort({ date: -1 });
-    console.log(post);
+
     if (!post) {
       return res.status(500).json({ msg: "Server Error" });
     }
