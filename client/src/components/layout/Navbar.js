@@ -25,7 +25,7 @@ const Navbar = () => {
           onClick={() => {
             dispatch(logout());
           }}
-          href="#!"
+          href="/"
         >
           <i className="fas fa-sign-out-alt" />{" "}
           <span className="hide-sm">Logout</span>

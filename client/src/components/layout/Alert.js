@@ -6,7 +6,7 @@ export default function Alert() {
   //getting the alert component
   //getting the alert array component
   const alert_array = useSelector((state) => state.alert.alert);
-
+  
   //mapping through the array
   const alertMessage =
     alert_array != null &&

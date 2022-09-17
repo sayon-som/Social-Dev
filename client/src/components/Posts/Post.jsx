@@ -9,8 +9,8 @@ const Post = () => {
   const posts = useSelector((state) => state.post.posts);
   useEffect(() => {
     dispatch(Get_Post());
-  },[]);
-  console.log(posts);
+  },[dispatch]);
+  
   return (
     <section className="container">
       <h1 className="large text-primary">Posts</h1>

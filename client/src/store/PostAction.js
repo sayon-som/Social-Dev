@@ -14,7 +14,7 @@ export const Get_Post = () => {
     };
     try {
       const res = await get_posts();
-      console.log(res.data);
+      
       dispatch(postActions.GET_POSTS(res.data));
     } catch (err) {
       dispatch(

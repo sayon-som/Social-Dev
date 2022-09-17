@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login_user } from "../../store/auth_actions";
 import { Redirect } from "react-router-dom";
+import { useEffect } from "react";
 const Login = () => {
   //bringing the auth state
   const navigate = useNavigate();
@@ -15,29 +16,37 @@ const Login = () => {
   });
   //destructuirng the form data
   const { email, password } = formdata;
+ 
   const change = (e) => {
+    
     setformdata({
       ...formdata,
       [e.target.name]: e.target.value,
     });
   };
   //creating a submit function for the process to work
+  
   const submit = async (e) => {
     e.preventDefault();
-
-    try {
-      //handling the basic logic for login
-      dispatch(login_user({ email, password }));
-      if (isauth) {
-        navigate("/dashboard");
-      }
-    } catch (err) {
-      console.log(err.response.data);
-    }
+    dispatch(login_user({ email, password }));
   };
-
+  // try {
+  //   //handling the basic logic for login
+  //   dispatch(login_user({ email, password }));
+  //   if (isauth) {
+  //     navigate("/dashboard");
+  //   }
+  // } catch (err) {
+  //   console.log(err.response.data);
+  // }
+  useEffect(()=>{
+  if (isauth) {
+    navigate("/dashboard");
+  }  
+  },[isauth,navigate])
+  
   return (
-    <Fragment>
+    <section className="container">
       <h1 className="large text-primary">Log In</h1>
       <p className="lead">
         <i className="fas fa-user"></i> login to your account
@@ -71,7 +80,7 @@ const Login = () => {
       <p className="my-1">
         Don't have an account? <Link to="/register">Sign Up</Link>
       </p>
-    </Fragment>
+    </section>
   );
 };
 

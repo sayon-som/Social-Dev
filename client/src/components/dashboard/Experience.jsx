@@ -5,13 +5,11 @@ import { useDispatch } from "react-redux";
 
 import formatDate from "../../auth/formatDate";
 import { delete_experience } from "../../store/ProfileFormActions";
-import { useNavigate } from "react-router-dom";
+
 const Experience = ({ experience }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  if (experience.length === 0) {
-    navigate("/dashboard");
-  }
+
+ 
 
   const experiences = experience.map((edu) => (
     <tr key={edu._id}>
@@ -30,7 +28,7 @@ const Experience = ({ experience }) => {
       </td>
     </tr>
   ));
-  console.log(experiences);
+  
 
   return (
     <Fragment>

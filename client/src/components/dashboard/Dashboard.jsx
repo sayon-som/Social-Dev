@@ -6,16 +6,17 @@ import Spinner from "../layout/Spinner";
 import { Link } from "react-router-dom";
 import DashboardActions from "./DashboardActions";
 import Education from "./Education";
-import Experience from "./Experince";
+import Experience from "./Experience";
 import { delete_account } from "../../store/ProfileFormActions";
 const Dashboard = () => {
   const profile = useSelector((state) => state.profile.profile);
   const user = useSelector((state) => state.auth.user);
 
   const dispatch = useDispatch();
-  useEffect(() => {
+
+ useEffect(() => {
     dispatch(get_profile());
-  }, []);
+  }, [dispatch]);
 
   return (
     <section className="container">

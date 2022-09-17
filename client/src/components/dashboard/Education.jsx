@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 //delete education implementation from the profile action
@@ -9,9 +9,13 @@ import { useNavigate } from "react-router-dom";
 const Education = ({ education }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  if (education.length === 0) {
+  
+  useEffect(()=>{
+if (education.length === 0) {
      navigate("/dashboard");
   }
+  },[navigate,education.length]);
+  
 
   const educations = education.map((edu) => (
     <tr key={edu._id}>
@@ -30,7 +34,7 @@ const Education = ({ education }) => {
       </td>
     </tr>
   ));
-  console.log(educations);
+  
 
   return (
     <Fragment>
