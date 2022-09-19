@@ -98,15 +98,20 @@ Router.get("/:post_id", auth, async (req, res) => {
 Router.delete("/:post_id", auth, async (req, res) => {
   //deleting the post with the specific id
   try {
-    const post = await PostModel.findByIdAndDelete(req.params.post_id);
+    const post = await PostModel.findById(req.params.post_id);
+   
+    //check if the post exist
+    if(!post){
+      return res.status(404).json({msg:"Post not found"});
+    }
     //checking for the correct user
     if (post.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: "Unauthorized user" });
     }
     await post.remove();
-    res.json({ msg: "Post is being successfully deleted" });
+    return res.json({ msg: "Post is being successfully deleted" });
   } catch (err) {
-    res.status(500).json({ msg: "Server error" });
+    return res.status(500).json({ msg: "Server error" });
   }
 });
 

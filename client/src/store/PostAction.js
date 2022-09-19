@@ -74,15 +74,17 @@ export const removeLike = (id) => {
 //delelte post
 export const deletePost = (post_id) => {
   return async (dispatch) => {
+    
     const deletepost = async () => {
       const res = await axios.delete(
-        `http://localhost:8000/api/post/unlikes/${post_id}`
+        `http://localhost:8000/api/post/${post_id}`
       );
       return res;
     };
     try {
       //setting alert
-      const res = await deletePost();
+      const res = await deletepost();
+      
       var id = uuidv4();
       const msg = "post removed";
       const type = "success";

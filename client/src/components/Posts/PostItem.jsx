@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
+
 import formatDate from "../../auth/formatDate";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addLike, removeLike, deletePost } from "../../store/PostAction";
 import { Fragment } from "react";
+
 const PostItem = ({
   addLike,
   removeLike,
@@ -11,7 +13,10 @@ const PostItem = ({
   auth,
   post: { _id, text, name, avatar, user, likes, comments, date },
   showActions,
-}) => (
+}) => {
+const navigate=useNavigate();
+return (
+  
   <div className="post bg-white p-1 my-1">
     <div>
       <Link to={`/profile/${user}`}>
@@ -26,7 +31,7 @@ const PostItem = ({
       {showActions && (
         <Fragment>
           <button
-            onClick={() => addLike(_id)}
+            onClick={() => addLike(_id) }
             type="button"
             className="btn btn-light"
           >
@@ -49,7 +54,8 @@ const PostItem = ({
           </Link>
           {!auth.loading && user === auth.user._id && (
             <button
-              onClick={() => deletePost(_id)}
+              onClick={() => {deletePost(_id) 
+              navigate("/dashboard") }}
               type="button"
               className="btn btn-danger"
             >
@@ -60,7 +66,8 @@ const PostItem = ({
       )}
     </div>
   </div>
-);
+)};
+          
 
 PostItem.defaultProps = {
   showActions: true,
