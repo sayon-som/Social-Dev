@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-//defining the initial state
+//defining the initial state for the post
 const psotInitial = {
+  //array of the post
   posts: [],
+  //single post
   post: null,
   loading: true,
   error: {},

@@ -66,7 +66,10 @@ const Edit_profile = () => {
 
   //get the current prifle using the use effect hook
   useEffect(() => {
+    if(!profile){
     dispatch(get_profile());
+    }
+
     setformdata({
       company: loading || !profile.company ? "" : profile.company,
       website: loading || !profile.website ? "" : profile.website,
@@ -74,19 +77,19 @@ const Edit_profile = () => {
       status: loading || !profile.status ? "" : profile.status,
       skills: loading || !profile.skills ? "" : profile.status,
       githubusername:
-        loading || !profile.githubusername ? "" : githubusername.company,
+        loading || !profile.githubusername ? "" : profile.githubusername,
       bio: loading || !profile.bio ? "" : profile.bio,
       twitter: loading || !profile.twitter ? "" : profile.twitter,
       facebook: loading || !profile.facebook ? "" : profile.facebook,
       linkedin: loading || !profile.linkedin ? "" : profile.linkedin,
       instagram: loading || !profile.instagram ? "" : profile.instagram,
     });
-  }, [loading]);
+  }, [loading,dispatch,profile]);
 
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(ProfileFormCreation(formdata, navigate, true));
-    navigate("/dashboard");
+   navigate("/dashboard");
   };
   return (
     <section className="container">

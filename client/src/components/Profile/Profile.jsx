@@ -22,7 +22,7 @@ const Profile = () => {
   const profile = useSelector((state) => state.profile.profile);
 
   const dispatch = useDispatch();
-  console.log(profile);
+ 
   
   //getting the id from the url
   const params = useParams();
@@ -30,7 +30,7 @@ const Profile = () => {
   //geting the profiles by Id
   useEffect(() => {
     dispatch(get_profile_by_id(id));
-  }, [get_profile_by_id]);
+  }, [dispatch,id]);
 
   return (
     <section className="container">

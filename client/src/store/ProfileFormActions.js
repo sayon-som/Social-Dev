@@ -28,9 +28,9 @@ export const ProfileFormCreation = (formdata, navigate, edit = false) => {
       const msg = edit ? "Profile updated" : "Profile has been created";
       const type = "success";
       dispatch(alertActions.setAlert({ id, msg, type }));
-      setTimeout(() => {
-        dispatch(alertActions.removeAlert({ id }));
-      }, 2000);
+      // setTimeout(() => {
+      //   dispatch(alertActions.removeAlert({ id }));
+      // }, 2000);
 
       if (!edit) {
         navigate("/dashboard");
@@ -142,13 +142,13 @@ export const delete_education = (edu_id) => {
     try {
       const res = await delete_edu_confirm();
       dispatch(ProfileActions.update_profile(res.data));
-      var id = uuidv4();
-      const msg = "education removed";
-      const type = "success";
-      dispatch(alertActions.setAlert({ id, msg, type }));
-      setTimeout(() => {
-        dispatch(alertActions.removeAlert({ id }));
-      }, 2000);
+      // var id = uuidv4();
+      // const msg = "education removed";
+      // const type = "success";
+      // dispatch(alertActions.setAlert({ id, msg, type }));
+      // setTimeout(() => {
+      //   dispatch(alertActions.removeAlert({ id }));
+      // }, 2000);
     } catch (err) {
       const errors = err.response.data.errors;
 
@@ -174,13 +174,13 @@ export const delete_experience = (ex_id) => {
     try {
       const res = await delete_edu_confirm();
       dispatch(ProfileActions.update_profile(res.data));
-      var id = uuidv4();
-      const msg = "experience removed";
-      const type = "success";
-      dispatch(alertActions.setAlert({ id, msg, type }));
-      setTimeout(() => {
-        dispatch(alertActions.removeAlert({ id }));
-      }, 2000);
+      // var id = uuidv4();
+      // const msg = "experience removed";
+      // const type = "success";
+      // dispatch(alertActions.setAlert({ id, msg, type }));
+      // setTimeout(() => {
+      //   dispatch(alertActions.removeAlert({ id }));
+      // }, 2000);
     } catch (err) {
       const errors = err.response.data.errors;
 
@@ -205,13 +205,13 @@ export const delete_account = () => {
       const res = await delete_edu_confirm();
       dispatch(ProfileActions.clear());
       dispatch(auth_real_actions.deleted_account());
-      var id = uuidv4();
-      const msg = "Your account has been removed";
-      const type = "success";
-      dispatch(alertActions.setAlert({ id, msg, type }));
-      setTimeout(() => {
-        dispatch(alertActions.removeAlert({ id }));
-      }, 2000);
+      // var id = uuidv4();
+      // const msg = "Your account has been removed";
+      // const type = "success";
+      // dispatch(alertActions.setAlert({ id, msg, type }));
+      // setTimeout(() => {2
+      //   dispatch(alertActions.removeAlert({ id }));
+      // }, 2000);
     } catch (err) {
       const errors = err.response.data.errors;
 

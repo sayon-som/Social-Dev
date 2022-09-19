@@ -10,8 +10,9 @@ const Experience = ({ experience }) => {
   const dispatch = useDispatch();
 
  
-
-  const experiences = experience.map((edu) => (
+  //fucking nuisance working with the redux toolkit
+  
+  const experiences = experience?.map((edu) => (
     <tr key={edu._id}>
       <td>{edu.company}</td>
       <td className="hide-sm">{edu.title}</td>
@@ -31,27 +32,23 @@ const Experience = ({ experience }) => {
   
 
   return (
-    <Fragment>
-      {experiences.length === 0 ? (
-        <p>No experience is present</p>
-      ) : (
-        <Fragment>
-          <h2 className="my-2">experience Credentials</h2>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Company</th>
-                <th className="hide-sm">Position</th>
-                <th className="hide-sm">Years</th>
-                <th />
-              </tr>
-            </thead>
-            <tbody>{experiences.length === 0 ? "no" : experiences}</tbody>
-          </table>
-        </Fragment>
-      )}
+    
+         <Fragment>
+      <h2 className="my-2">Experience Credentials</h2>
+      <table className="table">
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th className="hide-sm">Title</th>
+            <th className="hide-sm">Years</th>
+            <th />
+          </tr>
+        </thead>
+        <tbody>{experiences}</tbody>
+      </table>
     </Fragment>
   );
+  
 };
 
 export default Experience;
