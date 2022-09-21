@@ -27,6 +27,7 @@ export const Post = createSlice({
       state.loading = false;
     },
     UPDATE_LIKES(state, action) {
+    
       state.posts = state.posts.map((post) =>
         post._id === action.payload.id
           ? {
@@ -40,6 +41,25 @@ export const Post = createSlice({
       state.posts = state.posts.filter((post) => post._id !== action.payload);
       state.loading = false;
     },
+    ADD_POST(state,action){
+      state.posts=[action.payload,...state.posts];
+    state.loading=false;
+    }
+    ,
+    GET_POST(state,action){
+      state.post=action.payload;
+      state.loading=false;
+    },
+    ADD_COMMENT(state,action){
+state.post.comments=action.payload;
+state.loading=false;
+    },
+    REMOVE_COMMENT(state,action){
+state.post.comments =[...state.post, state.post.comments.filter(
+  (comment) => comment._id !== action.payload
+)];
+state.loading=false;
+    }
   },
 });
 

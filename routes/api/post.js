@@ -99,10 +99,10 @@ Router.delete("/:post_id", auth, async (req, res) => {
   //deleting the post with the specific id
   try {
     const post = await PostModel.findById(req.params.post_id);
-   
+
     //check if the post exist
-    if(!post){
-      return res.status(404).json({msg:"Post not found"});
+    if (!post) {
+      return res.status(404).json({ msg: "Post not found" });
     }
     //checking for the correct user
     if (post.user.toString() !== req.user.id) {
@@ -141,12 +141,12 @@ Router.put("/likes/:id", auth, async (req, res) => {
     await post
       .save()
       .then((docs) => {
-        console.log(docs);
+        console.log("Liked and working just fine");
       })
       .catch((err) => console.log(err));
     return res.status(200).json(post.likes);
   } catch (err) {
-    res.status(500).json({ msg: "Server Error" });
+    return res.status(500).json({ msg: "Server Error" });
   }
 });
 
@@ -251,11 +251,14 @@ Router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
     }
 
     //if everything works fine
-    const removeIndex = post.comments
-      .map((comment) => comment.user.toString())
-      .indexOf(req.user.id);
+    post.comments = post.comments.filter(
+      ({ id }) => id !== req.params.comment_id
+    );
+    // const removeIndex = post.comments
+    //   .map((comment) => comment.user.toString())
+    //   .indexOf(req.user.id);
 
-    post.comments.splice(removeIndex, 1);
+    // post.comments.splice(removeIndex, 1);
     post.save();
     return res.status(200).json(post.comments);
   } catch (err) {

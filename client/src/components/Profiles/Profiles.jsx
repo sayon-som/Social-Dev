@@ -9,7 +9,7 @@ const Profiles = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(get_all_profiles());
-  }, [get_all_profiles]);
+  }, [dispatch]);
   const profiles = useSelector((state) => state.profile.profiles);
   const loading = useSelector((state) => state.profile.loading);
  

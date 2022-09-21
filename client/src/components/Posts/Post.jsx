@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Get_Post } from "../../store/PostAction";
+import PostForm from "./PostForm";
 
 import PostItem from "./PostItem";
 const Post = () => {
@@ -18,11 +19,11 @@ const Post = () => {
       <p className="lead">
         <i className="fas fa-user" /> Welcome to the community
       </p>
-      {/* <PostForm /> */}
+      <PostForm />
       <div className="posts">
       
         {posts.map((post) => (
-          <PostItem key={post._id} post={post} />
+          <PostItem key={Math.random()*10} post={post} />
         ))}
       </div>
     </section>

@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login_user } from "../../store/auth_actions";
-import { Redirect } from "react-router-dom";
 import { useEffect } from "react";
+
 const Login = () => {
   //bringing the auth state
   const navigate = useNavigate();

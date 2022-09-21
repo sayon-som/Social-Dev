@@ -12,9 +12,7 @@ import Create_profile from "./components/Profile_ops/Create_profile";
 import Dashboard from "./components/dashboard/Dashboard";
 import setauth from "./auth/addauthtoken";
 import { load_user } from "./store/auth_actions";
-import store from "./store";
-import { Provider } from "react-redux";
-import Alert from "./components/layout/Alert";
+
 
 import Edit_profile from "./components/Profile_ops/Edit_Profile";
 import Add_education from "./components/Profile_ops/Add_education";
@@ -22,6 +20,7 @@ import Add_Experience from "./components/Profile_ops/Add_Experience";
 import Profiles from "./components/Profiles/Profiles";
 import Profile from "./components/Profile/Profile";
 import Post from "./components/Posts/Post";
+import Single_post from "./components/Posts/Single_post";
 
 const App = () => {
   //load the users
@@ -58,6 +57,7 @@ const App = () => {
         <Route path="/profiles" element={<Profiles />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/posts" element={<Post />} />
+        <Route path="/post/:id" element={<Single_post />} />
       </Routes>
     </Router>
   );

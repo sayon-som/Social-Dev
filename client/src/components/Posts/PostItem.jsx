@@ -15,6 +15,7 @@ const PostItem = ({
   showActions,
 }) => {
 const navigate=useNavigate();
+
 return (
   
   <div className="post bg-white p-1 my-1">
@@ -26,29 +27,32 @@ return (
     </div>
     <div>
       <p className="my-1">{text}</p>
-      <p className="post-date">Posted on {formatDate(date)}</p>
+      {date && <p className="post-date">Posted on {formatDate(date)}</p>}
 
       {showActions && (
         <Fragment>
           <button
-            onClick={() => addLike(_id) }
+            onClick={() => {addLike(_id) 
+        navigate("/posts")
+            }}
             type="button"
             className="btn btn-light"
           >
             <i className="fas fa-thumbs-up" />{" "}
-            <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
+            <span>{ likes && <span>{likes.length}</span>}</span>
           </button>
           <button
-            onClick={() => removeLike(_id)}
+            onClick={() => {removeLike(_id)
+            navigate("/posts")}}
             type="button"
             className="btn btn-light"
           >
             <i className="fas fa-thumbs-down" />
           </button>
 
-          <Link to={`/posts/${_id}`} className="btn btn-primary">
+          <Link to={`/post/${_id}`} className="btn btn-primary">
             Discussion{" "}
-            {comments.length > 0 && (
+            {comments  && (
               <span className="comment-count">{comments.length}</span>
             )}
           </Link>
