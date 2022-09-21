@@ -4,10 +4,11 @@ import { Link, useParams } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
 import Spinner from "../layout/Spinner";
 import PostItem from "./PostItem";
-import Single_comment from "./Single_comment";
+import Singlecomment from "./Singlecomment";
 import { useDispatch } from "react-redux";
 import { Get_Single_Post } from "../../store/PostAction";
 import CommentForm from "./CommentForm";
+
 
 const Single_post = () => {
   const { id } = useParams();
@@ -30,7 +31,7 @@ const Single_post = () => {
       <CommentForm postId={post._id} />
       <div className="comments">
         {post.comments.map((comment) => (
-          <Single_comment key={comment._id} comment={comment} postId={post._id} />
+          <Singlecomment key={comment._id} comment={comment} postId={post._id} />
         ))}
       </div>
     </section>

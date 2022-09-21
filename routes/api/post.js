@@ -259,7 +259,7 @@ Router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
     //   .indexOf(req.user.id);
 
     // post.comments.splice(removeIndex, 1);
-    post.save();
+    await post.save();
     return res.status(200).json(post.comments);
   } catch (err) {
     return res.status(500).json({ msg: "Server Error" });

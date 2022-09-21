@@ -5,13 +5,19 @@ import { connect } from "react-redux";
 import { delComment } from "../../store/PostAction";
 import formatDate from "../../auth/formatDate";
 import { useDispatch } from "react-redux";
-const Single_comment = ({
+const Singlecomment = ({
   postId,
   comment: { _id, text, name, avatar, user, date },
-  auth,
-  delComment,
+ auth,
+ delComment
+  
 }) => {
   const dispatch = useDispatch();
+  //gettig the auth state
+ 
+  //getting the comments
+  
+
   return (
     <div className="post bg-white p-1 my-1">
       <div>
@@ -37,15 +43,15 @@ const Single_comment = ({
   );
 };
 
-Single_comment.propTypes = {
+Singlecomment.propTypes = {
   postId: PropTypes.string.isRequired,
   comment: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  delComment: PropTypes.func.isRequired,
+  
+ delComment:PropTypes.object.isRequired
 };
-
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { delComment })(Single_comment);
+export default connect(mapStateToProps, { delComment })(Singlecomment);
