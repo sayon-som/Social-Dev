@@ -209,9 +209,9 @@ export const delComment = (post_id,comment_id) => {
     };
     try {
       //setting alert
-       const res=await del_cmt();
+   const res=await del_cmt();
       console.log(res);
-      dispatch(postActions.REMOVE_COMMENT(comment_id));
+      return dispatch(postActions.REMOVE_COMMENT(comment_id));
     } catch (err) {
       dispatch(
         postActions.POST_ERROR({

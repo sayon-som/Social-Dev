@@ -181,7 +181,7 @@ Router.put("/unlikes/:id", auth, async (req, res) => {
       .catch((err) => console.log(err));
     return res.status(200).json(post.likes);
   } catch (err) {
-    res.status(500).json("Server Error");
+   return  res.status(500).json("Server Error");
   }
 });
 
@@ -260,6 +260,7 @@ Router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
 
     // post.comments.splice(removeIndex, 1);
     await post.save();
+    console.log(post.comments);
     return res.status(200).json(post.comments);
   } catch (err) {
     return res.status(500).json({ msg: "Server Error" });

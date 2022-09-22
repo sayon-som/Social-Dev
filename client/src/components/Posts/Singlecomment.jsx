@@ -9,7 +9,7 @@ const Singlecomment = ({
   postId,
   comment: { _id, text, name, avatar, user, date },
  auth,
- delComment
+
   
 }) => {
   const dispatch = useDispatch();
@@ -48,7 +48,7 @@ Singlecomment.propTypes = {
   comment: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   
- delComment:PropTypes.object.isRequired
+ 
 };
 const mapStateToProps = (state) => ({
   auth: state.auth,
