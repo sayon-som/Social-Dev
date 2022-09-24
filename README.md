@@ -3,6 +3,6 @@ A Social Media Application for developers where they can built their own portfol
 
 THE DOCUMENT DIAGRAM IS REPRESENTED AS BELLOW:
 
-![image](https://user-images.githubusercontent.com/65534202/192113696-9e37d35b-9f55-4d64-bda6-de5394e2840e.png)
+![image](https://user-images.githubusercontent.com/65534202/192114652-8c9c1901-bb38-4cce-a88d-5a070f9236b7.png)
 
 
