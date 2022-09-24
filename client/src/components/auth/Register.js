@@ -61,9 +61,11 @@ const Register = () => {
       //to be made with help of react redux
       //sending the data to the register user action
       dispatch(register_user({ name, email, password }));
+      
       if (isauth) {
         navigate("/dashboard");
       }
+    
     }
   };
 

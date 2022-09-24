@@ -193,7 +193,7 @@ Router.post(
   "/comment/:id",
   [auth, [check("text", "text should be reqiured").not().isEmpty()]],
   async (req, res) => {
-    const errors = validationResult(req);
+    const errors = validationResult(req); 
     //in case of errors
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -216,13 +216,8 @@ Router.post(
       //adding the comment to the mongoose schema
       post.comments.unshift(newComment);
       //saving the new post and showing the result
-      await post.save((err, result) => {
-        if (err) {
-          return res.status(500).json({ msg: "Mongoose error" });
-        } else {
-          return res.status(200).json({ msg: result });
-        }
-      });
+      await post.save();
+        
       return res.status(200).json(post.comments);
     } catch (err) {
       return res.status(500).json({ msg: "Server Error" });
@@ -235,9 +230,11 @@ Router.post(
 // @access Private
 Router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
   try {
+    
     //getting post by the id
     const post = await PostModel.findById(req.params.id);
     //getting the comments
+    
     const comment = post.comments.find(
       (comment) => comment.id === req.params.comment_id
     );
@@ -259,9 +256,16 @@ Router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
     //   .indexOf(req.user.id);
 
     // post.comments.splice(removeIndex, 1);
-    await post.save();
+       await post.save((err, result) => {
+         if (err) {
+           return res.status(500).json({ msg: "Mongoose error" });
+         } else {
+          console.log(result.comments);
+           return res.status(200).json({ msg: result });
+         }
+       });
     console.log(post.comments);
-    return res.status(200).json(post.comments);
+   
   } catch (err) {
     return res.status(500).json({ msg: "Server Error" });
   }

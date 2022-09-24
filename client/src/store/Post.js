@@ -55,9 +55,9 @@ state.post.comments=action.payload;
 state.loading=false;
     },
     REMOVE_COMMENT(state,action){
-state.post.comments =[...state.post, state.post.comments.filter(
+state.post.comments =state.post.comments.filter(
   (comment) => comment._id !== action.payload
-)];
+);
 state.loading=false;
     }
   },

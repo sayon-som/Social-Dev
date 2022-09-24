@@ -200,18 +200,20 @@ export const delComment = (post_id,comment_id) => {
     //config for deleting the comments
   
     const del_cmt = async () => {
-      const res = await axios.delete(
+   
+      const ret = await axios.delete(
         `http://localhost:8000/api/post/comment/${post_id}/${comment_id}`,
        
       //  /comment/:id/:comment_id
       );
-      return res;
+     return ret;
     };
     try {
       //setting alert
-   const res=await del_cmt();
-      console.log(res);
-      return dispatch(postActions.REMOVE_COMMENT(comment_id));
+   const t=await del_cmt();
+      
+       dispatch(postActions.REMOVE_COMMENT(comment_id));
+      
     } catch (err) {
       dispatch(
         postActions.POST_ERROR({

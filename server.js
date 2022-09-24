@@ -4,7 +4,7 @@ const app = express();
 //getting the server connection
 const connect = require("./config/db");
 //getting the routers
-
+const path=require('path');
 const cors = require("cors");
 const UserRouter = require("./routes/api/user");
 const AuthRouter = require("./routes/api/auth");
@@ -16,9 +16,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //testing
-app.get("/", (req, res) => {
-  res.status(200).json({ msg: "API is running" });
-});
+// app.get("/", (req, res) => {
+//   res.status(200).json({ msg: "API is running" });
+// });
 //connecting to database
 connect();
 //enabling the use of cors
@@ -37,6 +37,18 @@ app.use("/api/user", UserRouter);
 app.use("/api/post", PostRouter);
 app.use("/api/auth", AuthRouter);
 app.use("/api/profile", ProfileRouter);
+
+//serving the static assets in production
+
+if(process.env.NODE_ENV=='production'){
+  //setting the static folders
+  app.use(express.static('client/build'));
+  app.get('*',(req,res)=>{
+    res.sendFile(path.resolve(__dirname,'client','build','index.html'));
+
+  })
+}
+
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
