@@ -6,7 +6,7 @@ const UserModel = require("../../models/user");
 //preparation of the profile creation
 const { body, validationResult, check } = require("express-validator");
 const { route } = require("./auth");
-const { compareSync } = require("bcryptjs");
+const { compareSync } = require("bcrypt");
 //importing the config module
 const config = require("config");
 const request = require("request");

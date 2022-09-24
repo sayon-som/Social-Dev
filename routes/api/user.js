@@ -8,7 +8,7 @@ const UserModel = require("../../models/user");
 const gravatar = require("gravatar");
 //getting the bcrypt
 
-const bcrypt = require("bcryptjs");
+const bcrypt=require('bcrypt');
 
 //getting the jwt
 
