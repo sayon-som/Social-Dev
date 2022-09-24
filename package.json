@@ -23,6 +23,7 @@
     "i": "^0.3.7",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.0",
+    "nodemon": "^2.0.20",
     "react-redux": "^8.0.2",
     "redux": "^4.2.0",
     "request": "^2.88.2"
