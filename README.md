@@ -1,5 +1,13 @@
-# Social-Dev
-A Social Media Application for developers where they can built their own portfolio , interact with other developers by posting their thoughts and queries , along with like , disklike and comment functionality.
+# <-- Social-Dev -->
+A Social Media Application for developers where they can built their own portfolio , interact with other developers by posting their thoughts and queries , along with like , disklike and comment functionality where authentication and authorization of the users is implemented by JWT auth.
+
+
+### TECHNOLOGY STACK
+
+* FRONTEND : REACTJS , REDUX , REDUXTOOLKIT.
+* BACKEND  : NODEJS , EXPRESSJS , MONGODB , JWT auth.
+
+
 
 THE DOCUMENT DIAGRAM IS REPRESENTED AS BELLOW:
 
